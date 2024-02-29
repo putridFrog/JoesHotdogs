@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Joe's Hotdogs</title>
+    </head>
+    <body>
+        <div id="jmenu"></div>
+        <div id="fmenu"></div>
+        <script>
+            myJson = '{"Hotdogs":"4.00","Fries":"3.50","Soda":"1.50","Sauerkraut":"1.00"}';
+            const menu = JSON.parse(myJson);
+            const fMenu = {
+                Hotdogs: 4.00,
+                Fries: 3.50,
+                Soda: 1.50,
+                Sauerkraut: 1.00
+            };
+            const aMenu = [];
+            aMenu["Hotdogs"] = 4.00;
+            aMenu["Fries"] = 3.50;
+            aMenu["Soda"] = 1.50;
+            aMenu["Sauerkraut"] = 1.00;
+
+            displayjMenu();
+            displayfMenu();
+
+            function displayjMenu(){
+                for (const x in menu){
+                    document.getElementById("jmenu").innerHTML += "<p>" + x + " costs " + menu[x] + "</p><br>";
+                }
+            }
+            function displayfMenu(){
+                for (const x in fMenu){
+                    document.getElementById("fmenu").innerHTML += "<p>" + x + " costs " + parseFloat(fMenu[x]).toFixed(2) + "</p><br>";
+                }
+            }
+        </script>
+    </body>
+</html>

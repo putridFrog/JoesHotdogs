@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Joe's Hotdogs</title>
+    </head>
+    <body>
+        <div id="jmenu"></div>
+        <div id="fmenu"></div>
+        <div>
+            <input type="text" id="item">
+            <button id="adcart" onclick="addToCart()">Add To Cart</button>
+            <button id="checkout" onclick="checkout()">Checkout</button>
+        </div>
+        <div id="cart"></div>
+        <div id="receipt"></div>
+        <script>
+            const menu = {
+                hotdog: 4.00,
+                fries: 3.50,
+                soda: 1.50,
+                sauerkraut: 1.00
+            };
+            const amount = [];
+            amount["hotdog"] = 0;
+            amount["fries"] = 0;
+            amount["soda"] = 0;
+            amount["sauerkraut"] = 0;
+
+            displayMenu();
+            function checkout(){
+                document.getElementById("receipt").innerHTML = "<p> Your Receipt: </p>"
+                total = 0;
+                for(const x in amount){
+                    if(amount[x] > 0){
+                        itemTotal = menu[x] * amount[x];
+                        total += itemTotal;
+                        document.getElementById("receipt").innerHTML += "<p>"+ x +": $" + itemTotal.toFixed(2) + "</p>"
+                        amount[x] = 0;
+                    }
+                }
+                document.getElementById("receipt").innerHTML += "<p> Total: $"+ total.toFixed(2) +"</p>"
+                document.getElementById("cart").innerHTML = "";
+            }
+            function addToCart(){
+                document.getElementById("cart").innerHTML = "<p> Your Cart: </p>";
+                document.getElementById("receipt").innerHTML = "";
+                item = document.getElementById("item").value.toString().toLowerCase();
+                for(const x in amount){
+                    if (item == x){
+                        amount[x] += 1;   
+                    }
+                    if(amount[x] > 0){
+                        document.getElementById("cart").innerHTML += "<p>" + x +"(" + amount[x] +")</p>";
+                    }
+                }
+            }
+            function displayMenu(){
+                for (const x in menu){
+                    document.getElementById("fmenu").innerHTML += "<p>" + x + " costs $" + parseFloat(menu[x]).toFixed(2) + "</p>";
+                }
+            }
+        </script>
+    </body>
+</html>
